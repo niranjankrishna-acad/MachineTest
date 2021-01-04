@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework.permission import AllowAny
-import random
-import django.http import JsonResponse
+from rest_framework.permissions import AllowAny
+from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import login, logout
+import random
 import re
 
 from .serializers import UserSerializer
@@ -28,7 +28,7 @@ def signin(request):
     password = request.POST['password']
 
     # Validation Part
-    if not re.match("/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g", username):
+    if not re.match("([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}", username):
         return JsonResponse({'error': 'Enter valid email'})
 
     if len(password) < 5:
@@ -76,3 +76,16 @@ def signout(request, id):
         return JsonResponse({'error': 'Invalid user ID'})
 
     return JsonResponse({'success': 'Logout Success'})
+
+
+class UserViewset(viewsets.ModelViewSet):
+    permission_classes_by_action = {'create': [AllowAny]}
+
+    queryset = CustomUser.objects.all().order_by('id')
+    serializer_class = UserSerializer
+
+    def get_permissions(self):
+        try:
+            return [permission() for permission in self.permission_classes_by_action[self.action]]
+        except KeyError:
+            return [permission() for permission in self.permission_classes]
