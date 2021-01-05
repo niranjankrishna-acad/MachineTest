@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'api',
     'api.category',
     'api.product',
-    'api.user'
+    'api.user',
+    'api.order',
 ]
 
 MIDDLEWARE = [
@@ -138,12 +139,12 @@ CORS_ORIGIN_ALLOW_ALL = True
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }

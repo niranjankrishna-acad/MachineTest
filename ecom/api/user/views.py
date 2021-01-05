@@ -28,7 +28,7 @@ def signin(request):
     password = request.POST['password']
 
     # Validation Part
-    if not re.match("([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}", username):
+    if not re.match("^[\w\.\+\-]+\@[\w]+\.[a-z]{2,3}$", username):
         return JsonResponse({'error': 'Enter valid email'})
 
     if len(password) < 5:
@@ -63,19 +63,19 @@ def signin(request):
 
 
 def signout(request, id):
+    logout(request)
 
-    UserModel = get_user_model
+    UserModel = get_user_model()
 
     try:
         user = UserModel.objects.get(pk=id)
         user.session_token = "0"
         user.save()
-        logout(request)
 
     except UserModel.DoesNotExist:
         return JsonResponse({'error': 'Invalid user ID'})
 
-    return JsonResponse({'success': 'Logout Success'})
+    return JsonResponse({'success': 'Logout success'})
 
 
 class UserViewset(viewsets.ModelViewSet):
