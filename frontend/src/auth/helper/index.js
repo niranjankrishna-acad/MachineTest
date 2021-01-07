@@ -1,5 +1,5 @@
 import { API } from '../../backend'
-import { cartEmpty } from '../../core/helper/CartHelper'
+import { emptyCart } from '../../core/helper/CartHelper'
 
 export const signup = user => {
     return fetch(`${API}user/`, {
@@ -49,7 +49,7 @@ export const signout = next => {
     const userID = isAuthenticated() && isAuthenticated().user.id
     if (typeof window !== undefined) {
         localStorage.removeItem("token")
-        cartEmpty(() => { })
+        emptyCart(() => { })
 
         return fetch(`${API}user/logout/${userID}`, {
             method: "GET"
