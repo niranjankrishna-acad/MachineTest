@@ -45,3 +45,20 @@ export const isAuthenticated = () => {
     }
 }
 
+export const signout = next => {
+    const userID = isAuthenticated() && isAuthenticated().user.id
+    if (typeof window !== undefined) {
+        localStorage.removeItem("token")
+        cartEmpty(() => { })
+
+        return fetch(`${API}user/logout/${userID}`, {
+            method: "GET"
+        })
+            .then(res => {
+                console.log("Signout success");
+                next();
+            })
+            .catch(err => console.log(err))
+
+    }
+}
