@@ -54,7 +54,7 @@ const Signup = () => {
             <div className="row">
                 <div className="col-md-6 offset-md-3">
                     <div className="alert alert-success" style={{ display: (success ? "" : "none") }}>
-                        New Account created successfully. Please login
+                        New Account created successfully. Please <Link to="/signin">login now</Link>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,6 @@ const Signup = () => {
                     </form>
                 </div>
             </div>
-            {JSON.stringify(values)}
         </Base>
     )
 }
