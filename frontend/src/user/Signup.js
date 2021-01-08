@@ -12,15 +12,48 @@ const Signup = () => {
         success: false
     })
 
-    const handleChange = name => event => {
-        setValues({ ...values, error: false, [name]: event.target.value })
+    const { name, email, password, error, success } = values
+
+
+    {/* Higher order function */ }
+    const handleChange = val => event => {
+        setValues({ ...values, error: false, [val]: event.target.value })
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        setValues({
+            ...values,
+            error: false
+        })
+        signup({ name, email, password })
+            .then(data => {
+                console.log("DATA", data)
+                if (data.email === email) {
+                    setValues({
+                        ...values,
+                        name: "",
+                        email: "",
+                        password: "",
+                        error: "",
+                        success: true
+                    })
+                } else {
+                    setValues({
+                        ...values,
+                        error: true,
+                        success: false
+                    })
+                }
+            })
+            .catch(err => console.log(err))
     }
 
     const successMessage = () => {
         return (
             <div className="row">
                 <div className="col-md-6 offset-md-3">
-                    <div className="alert alert-success" style={{ display: (values.success ? "" : "none") }}>
+                    <div className="alert alert-success" style={{ display: (success ? "" : "none") }}>
                         New Account created successfully. Please login
                     </div>
                 </div>
@@ -32,7 +65,7 @@ const Signup = () => {
         return (
             <div className="row">
                 <div className="col-md-6 offset-md-3">
-                    <div className="alert alert-danger" style={{ display: (values.error ? "" : "none") }}>
+                    <div className="alert alert-danger" style={{ display: (error ? "" : "none") }}>
                         Check all fields again
                     </div>
                 </div>
@@ -49,20 +82,21 @@ const Signup = () => {
                     <form action="">
                         <div className="form-group">
                             <label className="text-light">Name</label>
-                            <input className="form-control" type="text" value={values.name} onChange={handleChange("name")} />
+                            <input className="form-control" type="text" value={name} onChange={handleChange("name")} />
                         </div>
                         <div className="form-group">
                             <label className="text-light">Email</label>
-                            <input className="form-control" type="text" value={values.email} onChange={handleChange("email")} />
+                            <input className="form-control" type="text" value={email} onChange={handleChange("email")} />
                         </div>
                         <div className="form-group">
                             <label className="text-light">Password</label>
-                            <input className="form-control" type="password" value={values.password} onChange={handleChange("password")} />
+                            <input className="form-control" type="password" value={password} onChange={handleChange("password")} />
                         </div>
-                        <button className="btn btn-success btn-block">Submit</button>
+                        <button onClick={handleSubmit} className="btn btn-success btn-block">Submit</button>
                     </form>
                 </div>
             </div>
+            {JSON.stringify(values)}
         </Base>
     )
 }
