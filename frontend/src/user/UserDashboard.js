@@ -1,14 +1,12 @@
-import React from 'react'
-import Base from '../core/Base'
+import React from "react";
+import Base from "../core/Base";
 
 const UserDashboard = () => {
-    return (
-        <div>
-            <Base title="User Dashboard" descr="Welcome to your area">
+  return (
+    <Base title="User dashboard">
+      <h1>Welcome to user dashboard page</h1>
+    </Base>
+  );
+};
 
-            </Base>
-        </div>
-    )
-}
-
-export default UserDashboard
+export default UserDashboard;

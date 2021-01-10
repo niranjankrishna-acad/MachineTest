@@ -1,13 +1,19 @@
-import React from 'react'
+import React from "react";
 
 const ImageHelper = ({ product }) => {
-    const imageURL = product ? product.image : `https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/04/10/16/online-clothes-shops-hero.jpg`
+  const imageurl = product
+    ? product.image
+    : `https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`;
+  return (
+    <div className="rounded border border-success p-2">
+      <img
+        src={imageurl}
+        style={{ maxHeight: "100%", maxWidth: "100%" }}
+        className="mb-3 rounded"
+        alt=""
+      />
+    </div>
+  );
+};
 
-    return (
-        <div className="rounded border  border-success p-2">
-            <img src={imageURL} style={{ maxHeight: "100%", maxWidth: "100%" }} className="rounded" alt="image" />
-        </div>
-    )
-}
-
-export default ImageHelper
+export default ImageHelper;

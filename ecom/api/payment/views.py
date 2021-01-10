@@ -3,16 +3,18 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
+
 import braintree
 
 # Create your views here.
 
+
 gateway = braintree.BraintreeGateway(
     braintree.Configuration(
-        environment=braintree.Environment.Sandbox,
-        merchant_id='gpzp98dsymtrwbdd',
-        public_key='5775gfhhbk3yjn59',
-        private_key='afe39a4a337ddcec8a17871cdcbabf74'
+        braintree.Environment.Sandbox,
+        merchant_id="3fy8tzdbr3rpgq8h",
+        public_key="rfb9rdv4yq3d92qm",
+        private_key="7e3e7363714aa1baeeb4bdeb1bc9a2eb"
     )
 )
 
@@ -32,19 +34,18 @@ def validate_user_session(id, token):
 @csrf_exempt
 def generate_token(request, id, token):
     if not validate_user_session(id, token):
-        return JsonResponse({'error': 'Invalid session. Please login again'})
+        return JsonResponse({'error': 'Invalid session, Please login again!'})
 
     return JsonResponse({'clientToken': gateway.client_token.generate(), 'success': True})
 
 
 @csrf_exempt
 def process_payment(request, id, token):
-
     if not validate_user_session(id, token):
-        return JsonResponse({'error': 'Invalid session. Please login again'})
+        return JsonResponse({'error': 'Invalid session, Please login again!'})
 
-    nonce_from_the_client = request.POST['paymentMethodNonce']
-    amount_from_the_client = request.POST['amount']
+    nonce_from_the_client = request.POST["paymentMethodNonce"]
+    amount_from_the_client = request.POST["amount"]
 
     result = gateway.transaction.sale({
         "amount": amount_from_the_client,
@@ -56,9 +57,7 @@ def process_payment(request, id, token):
 
     if result.is_success:
         return JsonResponse({
-            'success': result.is_success,
-            'transaction': {'id': result.transaction.id, 'amount': result.transaction.amount}
-        })
-
+            # NOTE: transaction spelling bug was fixed later
+            "success": result.is_success, 'transaction': {'id': result.transaction.id, 'amount': result.transaction.amount}})
     else:
-        return JsonResponse({'error': True, 'Success': False})
+        return JsonResponse({'error': True, 'sucess': False})
