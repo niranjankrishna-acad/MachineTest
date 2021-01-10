@@ -1,44 +1,43 @@
-import React, { useState, useEffect } from 'react'
-import Base from './Base'
-import { getProducts } from './helper/coreapicalls'
-import '../styles.css'
-import Card from './Card'
+import React, { useState, useEffect } from "react";
 
-const Home = () => {
+import { getProducts } from "./helper/coreapicalls";
+import Base from "./Base";
 
-    const [products, setProducts] = useState([])
-    const [error, setError] = useState(false)
+import "../styles.css";
+import Card from "./Card";
 
-    const loadAllProducts = () => {
-        getProducts()
-            .then(data => {
-                if (data.error) {
-                    setError(data.error)
-                    console.log(error);
-                } else {
-                    setProducts(data)
-                }
-            })
-            .catch(err => console.log(err))
-    }
+export default function Home() {
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState(false);
 
-    useEffect(() => {
-        loadAllProducts()
-    }, [])
+  const loadAllProducts = () => {
+    getProducts()
+      .then((data) => {
+        if (data.error) {
+          setError(data.error);
+          console.log(error);
+        } else {
+          setProducts(data);
+        }
+      });
+  };
 
-    return (
-        <Base title="Home Page" descr="Welcome to the store">
-            <div className="row">
-                {products.map((product, index) => {
-                    return (
-                        <div key={index} className="col-4 mb-4">
-                            <Card product={product} />
-                        </div>
-                    )
-                })}
+  useEffect(() => {
+    loadAllProducts();
+  }, []);
+
+  return (
+    <Base title="Home Page" description="Welcome to Tshirt store">
+      <h1>Home component</h1>
+      <div className="row">
+        {products.map((product, index) => {
+          return (
+            <div key={index} className="col-4 mb-4">
+              <Card product={product} />
             </div>
-        </Base>
-    )
+          );
+        })}
+      </div>
+    </Base>
+  );
 }
-
-export default Home
