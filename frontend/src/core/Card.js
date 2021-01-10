@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ImageHelper from './helper/ImageHelper'
 import { Redirect } from 'react-router-dom'
 import { addItemToCart, removeItemFromCart } from './helper/CartHelper'
+import { isAuthenticated } from '../auth/helper'
+
 
 
 const Card = ({ product, addToCart = true, removeFromCart = true }) => {
 
-    const isAuthenticated = true
+    const [redirect, setRedirect] = useState(false)
 
     const checkAddToCart = () => {
-        if (isAuthenticated) {
+        if (isAuthenticated()) {
             console.log("Added");
-            addItemToCart(product, () => { });
+            addItemToCart(product, setRedirect(true));
         } else {
             console.log("Login please");
         }
