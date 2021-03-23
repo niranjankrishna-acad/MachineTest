@@ -7,4 +7,5 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Order
         fields = ('user')
+
         # TODO: add product and quantity
