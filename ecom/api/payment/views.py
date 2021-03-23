@@ -21,7 +21,6 @@ gateway = braintree.BraintreeGateway(
 
 def validate_user_session(id, token):
     UserModel = get_user_model()
-
     try:
         user = UserModel.objects.get(pk=id)
         if user.session_token == token:
@@ -57,7 +56,11 @@ def process_payment(request, id, token):
 
     if result.is_success:
         return JsonResponse({
-            # NOTE: transaction spelling bug was fixed later
-            "success": result.is_success, 'transaction': {'id': result.transaction.id, 'amount': result.transaction.amount}})
+            "success": result.is_success,
+            'transaction': {
+                'id': result.transaction.id,
+                'amount': result.transaction.amount
+            }
+        })
     else:
         return JsonResponse({'error': True, 'sucess': False})
