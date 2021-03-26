@@ -9,7 +9,6 @@ class Order(models.Model):
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, null=True, blank=True
     )
-
     product_names = models.CharField(max_length=500)
     total_products = models.CharField(max_length=500, default=0)
     transaction_id = models.CharField(max_length=150, default=0)
