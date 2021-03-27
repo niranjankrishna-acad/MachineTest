@@ -21,7 +21,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             if attr == 'password':
                 instance.set_password(value)
             else:
-                setattr(instace, attr, value)
+                setattr(instance, attr, value)
 
         instance.save()
         return instance
