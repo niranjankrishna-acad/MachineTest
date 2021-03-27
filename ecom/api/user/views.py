@@ -27,12 +27,12 @@ def signin(request):
     print(username)
     print(password)
 
-# validation part
+    # validation part
     if not re.match("^[\w\.\+\-]+\@[\w]+\.[a-z]{2,3}$", username):
         return JsonResponse({'error': 'Enter a valid email'})
 
-    if len(password) < 3:
-        return JsonResponse({'error': 'Password needs to be at least of 3 char'})
+    if len(password) < 4:
+        return JsonResponse({'error': 'Password needs to be at least of 4 char'})
 
     UserModel = get_user_model()
 
@@ -62,14 +62,13 @@ def signin(request):
 
 
 def signout(request, id):
-    logout(request)
-
     UserModel = get_user_model()
 
     try:
         user = UserModel.objects.get(pk=id)
         user.session_token = "0"
         user.save()
+        logout(request)
 
     except UserModel.DoesNotExist:
         return JsonResponse({'error': 'Invalid user ID'})
