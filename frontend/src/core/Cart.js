@@ -5,13 +5,19 @@ import Card from "./Card";
 import { loadCart } from "./helper/cartHelper";
 import PaymentB from "./PaymentB";
 
+
+
 const Cart = () => {
   const [reload, setReload] = useState(false);
   const [products, setProducts] = useState([]);
 
+
+
   useEffect(() => {
     setProducts(loadCart());
   }, [reload]);
+
+
 
   const loadAllProducts = (products) => {
     return (
@@ -30,23 +36,18 @@ const Cart = () => {
     );
   };
 
-  const loadCheckout = () => {
-    return (
-      <div>
-        <h1>Checkout</h1>
-      </div>
-    );
-  };
+
+
 
   return (
-    <Base title="Cart page" description="Welcome to checkout">
+    <Base title="Your Cart" description="">
       <div className="row text-center">
-        <div className="col-6">
+        <div className="col-4">
           {products.length > 0 ? (loadAllProducts(products)) : (
             <h4>No products</h4>
           )}
         </div>
-        <div className="col-6">
+        <div className="col-5 ml-auto">
           {products.length > 0
             ? (
               <PaymentB products={products} setReload={setReload} />
