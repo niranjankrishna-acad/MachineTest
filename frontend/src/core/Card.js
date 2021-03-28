@@ -4,34 +4,52 @@ import { Redirect } from "react-router-dom";
 import { addItemToCart, removeItemFromCart } from "./helper/cartHelper";
 import { isAuthenticated } from "../auth/helper";
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Card = ({
   product,
   addtoCart = true,
   removeFromCart = false,
   reload = undefined,
-  setReload = (f) => f,
-  // function(f){return f}
+  setReload = (f) => f
 }) => {
+
   const [redirect, setRedirect] = useState(false);
 
-  const cartTitle = product ? product.name : "A photo from pexels";
-  const cartDescription = product ? product.description : "Default description";
-  const cartPrice = product ? product.price : "Default";
+  const cartTitle = product ? product.name : "Product Name";
+  const cartDescription = product ? product.description : "Product description";
+  const cartPrice = product ? product.price : "Price yet to be decided";
+
+
 
   const addToCart = () => {
     if (isAuthenticated()) {
       addItemToCart(product, () => setRedirect(true));
-      console.log("Added to cart");
+      // console.log("Added to cart");
     } else {
-      console.log("Login Please!");
+      // console.log("Login Please!");
+      toast.error('Login Please!', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
+
+
 
   const getAredirect = (redirect) => {
     if (redirect) {
       return <Redirect to="/cart" />;
     }
   };
+
+
 
   const showAddToCart = (addToCart) => {
     return (
@@ -46,12 +64,13 @@ const Card = ({
     );
   };
 
+
+
   const showRemoveFromCart = (removeFromCart) => {
     return (
       removeFromCart && (
         <button
           onClick={() => {
-            //TODO: handle this too
             removeItemFromCart(product.id);
             setReload(!reload);
 
@@ -65,16 +84,20 @@ const Card = ({
     );
   };
 
+
+
   return (
-    <div className="card text-white bg-dark border border-info ">
-      <div className="card-header lead">{cartTitle}</div>
+    <div className="card text-white bg-dark border-light mt-5">
       <div className="card-body">
         {getAredirect(redirect)}
         <ImageHelper product={product} />
-        <p className="lead bg-success font-weight-normal text-wrap">
+        <h4 className="card-header text-center bg-info">{cartTitle}</h4>
+        <p className="lead text-center font-weight-normal text-wrap pt-3">
           {cartDescription}
         </p>
-        <p className="btn btn-success rounded  btn-sm px-4">$ {cartPrice}</p>
+        <div className="text-center">
+          <p className="btn btn-warning rounded  btn-sm px-4">₹ {cartPrice}</p>
+        </div>
         <div className="row">
           <div className="col-12">
             {showAddToCart(addToCart)}
