@@ -1,35 +1,58 @@
 import React from "react";
 import Menu from "./Menu";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Base = ({
   title = "My Title",
   description = "My description",
-  className = "bg-dark text-white p-4",
+  className = "bg-dark text-white p-4 m-3",
   children,
 }) => {
   return (
     <div>
       <Menu />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="container-fluid">
-        <div className="jumbotron bg-dark text-white text-center">
-          <h2 className="display-4">{title}</h2>
-          <p className="lead">{description}</p>
+
+        <div className="jumbotron bg-dark text-white text-center m-5">
+          <h1 className="display-4 text-warning">{title}</h1>
+          <h3 className="lead">{description}</h3>
         </div>
         <div className={className}>{children}</div>
+
       </div>
-      <footer className="footer bg-dark mt-auto py-3">
-        <div className="container-fluid bg-success text-white text-center py-3">
-          <h4>If you got any questions, reach me out at instagram</h4>
-          <button className="btn btn-warning btn-lg">Contact Us</button>
+
+      <footer className="footer mt-5">
+        <div className="container-fluid bg-dark text-white text-center py-4 text-secondary">
+          <h4>Reach me out at</h4>
+          <p className="mb-4 text-white">
+            LinkedIn - www.linkedin.com/in/maneesh-sriram<br />
+            Gmail - maneeshsriram123@gmail.com
+            </p>
           <div className="container">
-            <span className="text-warning">
-              An Amazing Django React fullstack course
+            <span className=" text-secondary lead">
+              Fullstack Django and React Project By Maneesh
             </span>
           </div>
         </div>
       </footer>
+
     </div>
   );
 };
 
 export default Base;
+
+
