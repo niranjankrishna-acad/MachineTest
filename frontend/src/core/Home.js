@@ -6,9 +6,13 @@ import Base from "./Base";
 import "../styles.css";
 import Card from "./Card";
 
+
+
+
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(false);
+
 
   const loadAllProducts = () => {
     getProducts()
@@ -22,13 +26,14 @@ export default function Home() {
       });
   };
 
+
   useEffect(() => {
     loadAllProducts();
   }, []);
 
+
   return (
-    <Base title="Home Page" description="Welcome to Tshirt store">
-      <h1>Home component</h1>
+    <Base title="Fashionage" description="Welcome To Men's T-Shirt House">
       <div className="row">
         {products.map((product, index) => {
           return (
