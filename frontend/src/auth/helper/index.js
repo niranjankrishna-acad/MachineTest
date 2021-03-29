@@ -1,6 +1,8 @@
 import { API } from "../../backend";
 import { cartEmpty } from "../../core/helper/cartHelper";
 
+
+
 export const signup = (user) => {
   return fetch(`${API}user/`, {
     method: "POST",
@@ -15,6 +17,8 @@ export const signup = (user) => {
     })
     .catch((err) => console.log(err));
 };
+
+
 
 export const signin = (user) => {
   const formData = new FormData();
@@ -35,7 +39,6 @@ export const signin = (user) => {
 
   return fetch(`${API}user/login/`, {
     method: "POST",
-
     body: formData,
   })
     .then((response) => {
@@ -45,24 +48,30 @@ export const signin = (user) => {
     .catch((err) => console.log(err));
 };
 
+
+
 export const authenticate = (data, next) => {
   if (typeof window !== undefined) {
-    localStorage.setItem("jwt", JSON.stringify(data));
+    localStorage.setItem("customToken", JSON.stringify(data));
     next();
   }
 };
+
+
 
 export const isAuthenticated = () => {
   if (typeof window == undefined) {
     return false;
   }
-  if (localStorage.getItem("jwt")) {
-    return JSON.parse(localStorage.getItem("jwt"));
-    //TODO: compare JWT with database json token
+  if (localStorage.getItem("customToken")) {
+    return JSON.parse(localStorage.getItem("customToken"));
+    //TODO: compare customToken with database json token
   } else {
     return false;
   }
 };
+
+
 
 export const signout = (next) => {
   const userId = isAuthenticated() && isAuthenticated().user.id;
@@ -70,8 +79,8 @@ export const signout = (next) => {
   console.log("USERID: ", userId);
 
   if (typeof window !== undefined) {
-    localStorage.removeItem("jwt");
-    cartEmpty(() => {});
+    localStorage.removeItem("customToken");
+    cartEmpty(() => { });
     //next();
 
     return fetch(`${API}user/logout/${userId}`, {
