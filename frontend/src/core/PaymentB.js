@@ -7,11 +7,12 @@ import { isAuthenticated, signout } from "../auth/helper";
 
 import DropIn from "braintree-web-drop-in-react";
 
+
+
 const PaymentB = ({
   products,
   reload = undefined,
-  setReload = (f) => f,
-}) => {
+  setReload = (f) => f, }) => {
   const [info, setInfo] = useState({
     loading: false,
     success: false,
@@ -20,8 +21,12 @@ const PaymentB = ({
     instance: {},
   });
 
+
+
   const userId = isAuthenticated && isAuthenticated().user.id;
   const token = isAuthenticated && isAuthenticated().token;
+
+
 
   const getToken = (userId, token) => {
     getmeToken(userId, token)
@@ -41,9 +46,13 @@ const PaymentB = ({
       });
   };
 
+
+
   useEffect(() => {
     getToken(userId, token);
   }, []);
+
+
 
   const getAmount = () => {
     let amount = 0;
@@ -52,6 +61,9 @@ const PaymentB = ({
     });
     return amount;
   };
+
+
+
   const onPurchase = () => {
     setInfo({ loading: true });
     let nonce;
@@ -62,9 +74,11 @@ const PaymentB = ({
         paymentMethodNonce: nonce,
         amount: getAmount(),
       };
+
       processPayment(userId, token, paymentData)
         .then((response) => {
           console.log("POINT-1", response);
+
           if (response.error) {
             if (response.code == "1") {
               console.log("PAYMENT Failed!");
@@ -86,6 +100,7 @@ const PaymentB = ({
               transaction_id: response.transaction.id,
               amount: response.transaction.amount,
             };
+
             createOrder(userId, token, orderData)
               .then((response) => {
                 if (response.error) {
@@ -105,6 +120,7 @@ const PaymentB = ({
                 setInfo({ loading: false, success: false });
                 console.log("Order FAILED", error);
               });
+
             cartEmpty(() => {
               console.log("Did we got a crash?");
             });
@@ -112,12 +128,15 @@ const PaymentB = ({
             setReload(!reload);
           }
         })
+
         .catch((error) => {
           setInfo({ loading: false, success: false });
           console.log("PAYMENT FAILED", error);
         });
     });
   };
+
+
 
   const showbtnDropIn = () => {
     return (
@@ -144,6 +163,8 @@ const PaymentB = ({
       </div>
     );
   };
+
+
 
   return (
     <div>
