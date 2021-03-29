@@ -13,6 +13,8 @@ export const addItemToCart = (item, next) => {
   }
 };
 
+
+
 export const loadCart = () => {
   if (typeof window !== undefined) {
     if (localStorage.getItem("cart")) {
@@ -20,6 +22,8 @@ export const loadCart = () => {
     }
   }
 };
+
+
 
 export const removeItemFromCart = (productId) => {
   let cart = [];
@@ -36,6 +40,8 @@ export const removeItemFromCart = (productId) => {
   }
   return cart;
 };
+
+
 
 export const cartEmpty = (next) => {
   if (typeof window !== undefined) {
