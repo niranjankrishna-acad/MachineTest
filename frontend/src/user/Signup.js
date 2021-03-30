@@ -14,10 +14,18 @@ const Signup = () => {
 
   const { name, email, password, error, success } = values;
 
+
+
+
+
   const handleChange = (name) =>
     (event) => {
       setValues({ ...values, error: false, [name]: event.target.value });
     };
+
+
+
+
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -45,6 +53,10 @@ const Signup = () => {
       .catch((e) => console.log(e));
   };
 
+
+
+
+
   const successMessage = () => {
     return (
       <div className="row">
@@ -64,6 +76,10 @@ const Signup = () => {
     );
   };
 
+
+
+
+
   const errorMessage = () => {
     return (
       <div className="row">
@@ -78,6 +94,9 @@ const Signup = () => {
       </div>
     );
   };
+
+
+
 
   const signUpForm = () => {
     return (
@@ -103,7 +122,7 @@ const Signup = () => {
               />
             </div>
             <div className="form-group">
-              <label className="text-light">password</label>
+              <label className="text-light">Password</label>
               <input
                 className="form-control"
                 value={password}
@@ -113,8 +132,7 @@ const Signup = () => {
             </div>
             <button
               onClick={onSubmit}
-              className="btn btn-success btn-block"
-            >
+              className="btn btn-success btn-block">
               Submit
             </button>
           </form>
@@ -123,13 +141,16 @@ const Signup = () => {
     );
   };
 
+
+
+
   return (
-    <Base title="Sign Up Page" description="A signup for LCO user">
+    <Base title="Sign Up" description="Join Fashionage, Men's T-Shirt House">
       {successMessage()}
       {errorMessage()}
       {signUpForm()}
       <p className="text-white text-center">
-        {JSON.stringify(values)}
+        {/* {JSON.stringify(values)} */}
       </p>
     </Base>
   );
