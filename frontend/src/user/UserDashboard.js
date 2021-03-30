@@ -3,8 +3,7 @@ import Base from "../core/Base";
 
 const UserDashboard = () => {
   return (
-    <Base title="User dashboard">
-      <h1>Welcome to user dashboard page</h1>
+    <Base title="Dashboard" description="Check your previous orders here">
     </Base>
   );
 };
