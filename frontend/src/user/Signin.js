@@ -4,6 +4,8 @@ import { Link, Redirect } from "react-router-dom";
 import Base from "../core/Base";
 import { signin, authenticate, isAuthenticated } from "../auth/helper";
 
+
+
 const Signin = () => {
   const [values, setValues] = useState({
     name: "",
@@ -17,10 +19,16 @@ const Signin = () => {
   const { name, email, password, error, success, loading, didRedirect } =
     values;
 
+
+
+
   const handleChange = (name) =>
     (event) => {
       setValues({ ...values, error: false, [name]: event.target.value });
     };
+
+
+
 
   const onSumit = (event) => {
     event.preventDefault();
@@ -48,11 +56,17 @@ const Signin = () => {
       .catch((e) => console.log(e));
   };
 
+
+
+
   const performRedirect = () => {
     if (isAuthenticated()) {
       return <Redirect to="/" />;
     }
   };
+
+
+
 
   const loadingMessage = () => {
     return (
@@ -63,6 +77,9 @@ const Signin = () => {
       )
     );
   };
+
+
+
 
   const successMessage = () => {
     return (
@@ -83,20 +100,25 @@ const Signin = () => {
     );
   };
 
+
+
+
   const errorMessage = () => {
     return (
       <div className="row">
         <div className="col-md-6 offset-sm-3 text-left">
           <div
             className="alert alert-danger"
-            style={{ display: error ? "" : "none" }}
-          >
+            style={{ display: error ? "" : "none" }}>
             Check all fields again
           </div>
         </div>
       </div>
     );
   };
+
+
+
 
   const signInForm = () => {
     return (
@@ -114,7 +136,7 @@ const Signin = () => {
               />
             </div>
             <div className="form-group">
-              <label className="text-light">password</label>
+              <label className="text-light">Password</label>
               <input
                 name="password"
                 className="form-control"
@@ -135,13 +157,17 @@ const Signin = () => {
     );
   };
 
-  return (
-    <Base title="Welcome to sign in page" description="A tshirt store">
-      {loadingMessage()}
 
+
+
+  return (
+    <Base title="Sign In" description="Login & enjoy all features">
+      {successMessage()}
+      {errorMessage()}
+      {loadingMessage()}
       {signInForm()}
       <p className="text-center">
-        {JSON.stringify(values)}
+        {/* {JSON.stringify(values)} */}
       </p>
       {performRedirect()}
     </Base>
