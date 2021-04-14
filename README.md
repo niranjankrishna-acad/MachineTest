@@ -2,7 +2,7 @@
 Django and React based T-Shirt store web application
 
 ## Frontend : <br />
-`npm install` - Installs all the required npm modules from package.json file ,br />
+`npm install` - Installs all the required npm modules from package.json file <br />
 `npm start` - View the frontend project <br />
 <br />
 
