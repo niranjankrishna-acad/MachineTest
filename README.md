@@ -12,3 +12,9 @@ Django and React based T-Shirt store web application
 `pipenv install` - Install all the dependencies <br />
 `cd ecom` <br />
 `python manage.py runserver` - Start backend
+<br />
+
+### Stack used: <br />
+Frontend - HTML, CSS, Bootstrap, Javascript <br />
+Backend - Django <br />
+Database - Sqlite
