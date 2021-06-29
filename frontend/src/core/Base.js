@@ -38,12 +38,11 @@ const Base = ({
         <div className="container-fluid bg-dark text-white text-center py-4 text-secondary">
           <h4>Reach me out at</h4>
           <p className="mb-4 text-white">
-            LinkedIn - www.linkedin.com/in/maneesh-sriram<br />
-            Gmail - maneeshsriram123@gmail.com
+            Gmail - realniranjankrishna@gmail.com
             </p>
           <div className="container">
             <span className=" text-secondary lead">
-              Fullstack Django and React Project By Maneesh
+              Fullstack Django and React Project By Niranjan Krishna
             </span>
           </div>
         </div>

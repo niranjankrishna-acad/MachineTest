@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Base from "./Base";
 
 import Card from "./Card";
-import { loadCart } from "./helper/cartHelper";
+import { loadCart } from "./helper/CartHelper";
 import PaymentB from "./PaymentB";
 
 

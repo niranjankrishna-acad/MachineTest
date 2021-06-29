@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { cartEmpty } from "./helper/cartHelper";
-import { getmeToken, processPayment } from "./helper/paymentHelper";
-import { createOrder } from "./helper/orderHelper";
+import { cartEmpty } from "./helper/CartHelper";
+import { getmeToken, processPayment } from "./helper/PaymentHelper";
+import { createOrder } from "./helper/OrderHelper";
 import { isAuthenticated, signout } from "../auth/helper";
 
 import DropIn from "braintree-web-drop-in-react";

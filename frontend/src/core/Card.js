@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ImageHelper from "./helper/ImageHelper";
 import { Redirect } from "react-router-dom";
-import { addItemToCart, removeItemFromCart } from "./helper/cartHelper";
+import { addItemToCart, removeItemFromCart } from "./helper/CartHelper";
 import { isAuthenticated } from "../auth/helper";
 
 import { toast } from 'react-toastify';
