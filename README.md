@@ -1,4 +1,4 @@
-# Fashionage
+# Machine Test
 Django and React based T-Shirt store web application
 
 ## Frontend : <br />
